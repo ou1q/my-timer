@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>在线倒计时器</title>
+  <link id="favicon" rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>在线倒计时器</h1>
+    <input type="number" id="minutes" placeholder="输入分钟数" min="1" />
+    <button id="startBtn">开始</button>
+    <button id="pauseBtn" disabled>暂停</button>
+    <button id="resetBtn" disabled>重置</button>
+    <div id="display">00:00</div>
+  </div>
+  <audio id="alarm" src="alarm.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
