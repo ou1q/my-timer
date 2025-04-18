@@ -27,3 +27,23 @@ body {
     margin-top: 20px;
     font-weight: bold;
   }
+
+  .hidden { display: none; }
+body.wallpaper-bg1 { background: url('images/bg1.jpg') no-repeat center/cover; transition: background 0.5s ease; }
+
+.container.skin-glass {
+  background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.6);
+  transition: background 0.5s, border 0.5s;
+}
+.container.skin-carbon {
+  background:#1e1e28; color:#fff; border:none; transition:background 0.5s;
+}
+.container.skin-llama {
+  background:linear-gradient(135deg,#1f1f1f,#444); color:#b4ff9f; transition:background 0.5s;
+}
+.container.skin-nano {
+  background:#f7f7f7; border:2px dashed #ccc; transition:background 0.5s;
+}
+#settingsPanel button {
+  display:block; width:100%; margin:6px 0; padding:6px; font-size:14px; cursor:pointer;
+}

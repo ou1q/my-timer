@@ -78,3 +78,25 @@ function updateFavicon(progress) {
 // 初始化显示
 updateDisplay();
 updateFavicon(0);
+
+// 设置面板交互
+const settingsToggle = document.getElementById('settingsToggle');
+const settingsPanel  = document.getElementById('settingsPanel');
+settingsToggle.addEventListener('click', () => {
+  settingsPanel.classList.toggle('hidden');
+});
+
+// 切换背景
+document.querySelectorAll('#settingsPanel button[data-wall]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.body.className = 'wallpaper-' + btn.dataset.wall;
+  });
+});
+
+// 切换皮肤
+document.querySelectorAll('#settingsPanel button[data-skin]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const box = document.querySelector('.container');
+    box.className = 'container skin-' + btn.dataset.skin;
+  });
+});

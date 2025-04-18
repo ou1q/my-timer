@@ -16,6 +16,20 @@
     <button id="resetBtn" disabled>重置</button>
     <div id="display">00:00</div>
   </div>
+   <!-- 右上设置齿轮 -->
+<button id="settingsToggle" style="position:fixed;top:20px;right:20px;font-size:24px;z-index:1000;">⚙️</button>
+
+<!-- 设置面板，初始隐藏 -->
+<div id="settingsPanel" class="hidden" style="position:fixed;top:60px;right:20px;background:rgba(255,255,255,0.8);padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:1000;">
+  <h3>背景图</h3>
+  <button data-wall="bg1">背景 1</button>
+  <!-- 以后再加更多按钮 -->
+  <h3>皮肤</h3>
+  <button data-skin="glass">Glass</button>
+  <button data-skin="carbon">Carbon</button>
+  <button data-skin="llama">Llama</button>
+  <button data-skin="nano">Nano</button>
+</div>
   <audio id="alarm" src="audio/alarm1.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
