@@ -100,3 +100,4 @@ document.querySelectorAll('#settingsPanel button[data-skin]').forEach(btn => {
     box.className = 'container skin-' + btn.dataset.skin;
   });
 });
+
