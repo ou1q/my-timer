@@ -3,6 +3,8 @@ const display = document.getElementById('display');
 const faviconLink = document.getElementById('favicon');
 const alarm = document.getElementById('alarm');
 
+alarm.play().then(() => alarm.pause()).catch(() => {});
+
 document.getElementById('startBtn').onclick = () => {
   const mins = parseInt(document.getElementById('minutes').value);
   if (isNaN(mins) || mins <= 0) return alert('请输入正整数分钟数');
