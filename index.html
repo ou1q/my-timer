@@ -3,46 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>在线倒计时器</title>
+  <title>专注倒计时</title>
   <link id="favicon" rel="icon" href="favicon.ico" />
+  <!-- 可选：Google 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="container">
-    <h1>在线倒计时器</h1>
-        <!-- 预设按钮 -->
-    <div class="presets">
-      <button data-minutes="10">10 分钟</button>
-      <button data-minutes="20">20 分钟</button>
-    </div>
-
-    <!-- 自定义输入 -->
-    <div class="custom">
-      <input type="number" id="customMinutes" placeholder="自定义分钟" min="1" />
-      <button id="customStart">开始计时</button>
-    </div>
-    <input type="number" id="minutes" placeholder="输入分钟数" min="1" />
-    <button id="startBtn">开始</button>
-    <button id="pauseBtn" disabled>暂停</button>
-    <button id="resetBtn" disabled>重置</button>
-    <div id="display">00:00</div>
+<body class="wallpaper-bg2">
+  <!-- 设置面板 切换图标 -->
+  <button id="settingsToggle">⚙️</button>
+  <div id="settingsPanel" class="hidden">
+    <h3>背景</h3>
+    <button data-wall="bg1">背景 1</button>
+    <button data-wall="bg2">背景 2</button>
+    <h3>皮肤</h3>
+    <button data-skin="glass">Glass</button>
+    <button data-skin="carbon">Carbon</button>
+    <button data-skin="llama">Llama</button>
+    <button data-skin="nano">Nano</button>
   </div>
-   <!-- 右上设置齿轮 -->
-<button id="settingsToggle" style="position:fixed;top:20px;right:20px;font-size:24px;z-index:1000;">⚙️</button>
 
-<!-- 设置面板，初始隐藏 -->
-<div id="settingsPanel" class="hidden" style="position:fixed;top:60px;right:20px;background:rgba(255,255,255,0.8);padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:1000;">
-  <h3>背景图</h3>
-  <button data-wall="bg1">背景 1</button>
-  <button data-wall="bg2">背景 2</button>
-  <!-- 以后再加更多按钮 -->
-  <h3>皮肤</h3>
-  <button data-skin="glass">Glass</button>
-  <button data-skin="carbon">Carbon</button>
-  <button data-skin="llama">Llama</button>
-  <button data-skin="nano">Nano</button>
-</div>
-  <audio id="alarm" src="audio/alarm1.mp3" preload="auto"></audio>
+  <div class="container skin-glass">
+    <h1>在线倒计时器</h1>
+
+    <!-- 8 格预设按钮 -->
+    <div class="presets-grid">
+      <button data-minutes="0.5">30s</button>
+      <button data-minutes="1">1m</button>
+      <button data-minutes="5">5m</button>
+      <button data-minutes="10">10m</button>
+      <button data-minutes="30">30m</button>
+      <button data-minutes="45">45m</button>
+      <button data-minutes="60">60m</button>
+      <button data-minutes="custom" id="presetCustom">Custom</button>
+    </div>
+
+    <!-- 开始按钮 -->
+    <button id="customStart" disabled>开始</button>
+
+    <!-- 倒计时显示 -->
+    <div id="display">00:00</div>
+
+    <!-- 暂停 & 重置 -->
+    <div class="controls">
+      <button id="pauseBtn" disabled>暂停</button>
+      <button id="resetBtn" disabled>重置</button>
+    </div>
+  </div>
+
+  <audio id="alarm" src="audio/Alarm1.mp3" preload="auto"></audio>
   <script src="script.js"></script>
 </body>
 </html>
