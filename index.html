@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>专注倒计时</title>
   <link id="favicon" rel="icon" href="favicon.ico" />
-  <!-- 可选：Google 字体 -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="wallpaper-bg2">
-  <!-- 设置面板 切换图标 -->
+  <!-- 设置面板开关 -->
   <button id="settingsToggle">⚙️</button>
+  <!-- 设置面板 -->
   <div id="settingsPanel" class="hidden">
     <h3>背景</h3>
-    <button data-wall="bg1">背景 1</button>
-    <button data-wall="bg2">背景 2</button>
+    <button data-wall="bg1">背景 1</button>
+    <button data-wall="bg2">背景 2</button>
     <h3>皮肤</h3>
     <button data-skin="glass">Glass</button>
     <button data-skin="carbon">Carbon</button>
@@ -38,20 +38,23 @@
       <button data-minutes="custom" id="presetCustom">Custom</button>
     </div>
 
-    <!-- 开始按钮 -->
-    <button id="customStart" disabled>开始</button>
-
     <!-- 倒计时显示 -->
     <div id="display">00:00</div>
 
-    <!-- 暂停 & 重置 -->
-    <div class="controls">
-      <button id="pauseBtn" disabled>暂停</button>
-      <button id="resetBtn" disabled>重置</button>
+    <!-- ▶️/⏸️ 按钮 -->
+    <button id="toggleBtn">▶️</button>
+  </div>
+
+  <!-- Custom 输入分钟 模态框 -->
+  <div id="customModal" class="hidden">
+    <div class="modal-content">
+      <h3>请输入分钟数</h3>
+      <input type="number" id="customMinModal" placeholder="分钟" min="1" />
+      <button id="confirmCustom">开始</button>
     </div>
   </div>
 
   <audio id="alarm" src="audio/Alarm1.mp3" preload="auto"></audio>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

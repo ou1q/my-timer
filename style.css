@@ -1,129 +1,87 @@
-/* 字体 */
-body, .container {
-  font-family: 'Roboto Slab', serif;
-}
+/* 全局 & 字体 */
+body, .container { font-family: 'Roboto Slab', serif; margin:0; padding:0; }
+body { height:100vh; display:flex; justify-content:center; align-items:center; }
 
-/* 全局布局 */
-body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* 隐藏类 */
 .hidden { display: none; }
 
-/* 背景全屏铺满 */
+/* 背景铺满 */
 body.wallpaper-bg1,
 body.wallpaper-bg2 {
   background: no-repeat center center;
   background-size: cover;
   transition: background 0.5s ease;
 }
-body.wallpaper-bg1 {
-  background-image: url('images/bg1.jpg');
-}
-body.wallpaper-bg2 {
-  background-image: url('images/bg2.png');
-}
+body.wallpaper-bg1 { background-image: url('images/bg1.jpg'); }
+body.wallpaper-bg2 { background-image: url('images/bg2.png'); }
 
 /* 容器 & 皮肤 */
 .container {
-  background: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: background 0.5s, border 0.5s, color 0.5s;
+  background:#fff; padding:30px; border-radius:8px;
+  text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  transition:background 0.5s, border 0.5s, color 0.5s;
 }
-.container.skin-glass {
-  background: rgba(255,255,255,0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.6);
-}
-.container.skin-carbon {
-  background: #1e1e28;
-  color: #fff;
-  border: none;
-}
-.container.skin-llama {
-  background: linear-gradient(135deg,#1f1f1f,#444);
-  color: #b4ff9f;
-}
-.container.skin-nano {
-  background: #f7f7f7;
-  border: 2px dashed #ccc;
-}
+.container.skin-glass { background:rgba(255,255,255,0.3); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.6); }
+.container.skin-carbon { background:#1e1e28; color:#fff; border:none; }
+.container.skin-llama { background:linear-gradient(135deg,#1f1f1f,#444); color:#b4ff9f; }
+.container.skin-nano { background:#f7f7f7; border:2px dashed #ccc; }
+h1 { margin-bottom:20px; }
 
-h1 {
-  margin-bottom: 20px;
-}
-
-/* 预设按钮 网格布局 */
+/* 8 格预设网格 */
 .presets-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 15px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
+  margin-bottom:15px;
 }
 .presets-grid button {
-  padding: 10px 0;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  background: rgba(255,255,255,0.6);
-  cursor: pointer;
-  transition: background 0.3s;
+  padding:10px 0; font-size:14px; border:none; border-radius:6px;
+  background:rgba(255,255,255,0.6); cursor:pointer; transition:background 0.3s;
 }
 .presets-grid button.selected {
-  background: #ff6b6b;
-  color: #fff;
+  background:#ff6b6b; color:#fff;
 }
 
-/* 开始按钮 */
-#customStart {
-  margin-bottom: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
+/* 倒计时显示 */
+#display { font-size:3rem; margin:20px 0; }
 
-/* 显示 & 控制按钮 */
-#display {
-  font-size: 3rem;
-  margin: 20px 0;
+/* ▶️/⏸️ 按钮 */
+#toggleBtn {
+  width:80px; height:80px; font-size:40px; border:none;
+  border-radius:50%; background:rgba(255,255,255,0.4);
+  cursor:pointer; transition:background 0.3s;
 }
-.controls button {
-  margin: 0 10px;
-  padding: 6px 12px;
-  cursor: pointer;
-}
+#toggleBtn:hover { background:rgba(255,255,255,0.6); }
 
-/* 设置面板 */
+/* 设置面板控制 */
 #settingsToggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1000;
+  position:fixed; top:20px; right:20px; font-size:24px;
+  background:none; border:none; cursor:pointer; z-index:1000;
 }
 #settingsPanel {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  background: rgba(255,255,255,0.8);
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  z-index: 1000;
+  position:fixed; top:60px; right:20px;
+  background:rgba(255,255,255,0.8); padding:10px; border-radius:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:1000;
 }
 #settingsPanel button {
-  display: block;
-  width: 100%;
-  margin: 6px 0;
-  padding: 6px;
-  cursor: pointer;
+  display:block; width:100%; margin:6px 0; padding:6px; cursor:pointer;
+}
+
+/* Custom Modal */
+#customModal {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.5); display:flex;
+  justify-content:center; align-items:center; z-index:2000;
+}
+.modal-content {
+  background:#fff; padding:20px; border-radius:8px; text-align:center;
+}
+.modal-content input {
+  width:80px; padding:6px; font-size:16px; margin-right:10px;
+}
+.modal-content button {
+  padding:6px 20px; font-size:16px; cursor:pointer;
+}
+
+/* 让 customModal 的 hidden 真正生效 */
+#customModal.hidden {
+  display: none;
 }
