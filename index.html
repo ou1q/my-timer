@@ -10,6 +10,17 @@
 <body>
   <div class="container">
     <h1>在线倒计时器</h1>
+        <!-- 预设按钮 -->
+    <div class="presets">
+      <button data-minutes="10">10 分钟</button>
+      <button data-minutes="20">20 分钟</button>
+    </div>
+
+    <!-- 自定义输入 -->
+    <div class="custom">
+      <input type="number" id="customMinutes" placeholder="自定义分钟" min="1" />
+      <button id="customStart">开始计时</button>
+    </div>
     <input type="number" id="minutes" placeholder="输入分钟数" min="1" />
     <button id="startBtn">开始</button>
     <button id="pauseBtn" disabled>暂停</button>
@@ -23,6 +34,7 @@
 <div id="settingsPanel" class="hidden" style="position:fixed;top:60px;right:20px;background:rgba(255,255,255,0.8);padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:1000;">
   <h3>背景图</h3>
   <button data-wall="bg1">背景 1</button>
+  <button data-wall="bg2">背景 2</button>
   <!-- 以后再加更多按钮 -->
   <h3>皮肤</h3>
   <button data-skin="glass">Glass</button>

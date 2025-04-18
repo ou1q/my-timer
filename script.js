@@ -101,3 +101,39 @@ document.querySelectorAll('#settingsPanel button[data-skin]').forEach(btn => {
   });
 });
 
+// 获取元素
+const presets   = document.querySelectorAll('.presets button');
+const customIn  = document.getElementById('customMinutes');
+const customBtn = document.getElementById('customStart');
+
+// 复用倒计时启动函数
+function startTimerByMinutes(mins) {
+  timeLeft = mins * 60;
+  updateDisplay();
+  clearInterval(timer);
+  timer = setInterval(() => {
+    timeLeft--;
+    updateDisplay();
+    updateFavicon((totalSec - timeLeft) / totalSec);
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      alarm.play();
+    }
+  }, 1000);
+  totalSec = timeLeft;
+}
+
+// 预设按钮点击
+presets.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const mins = parseInt(btn.dataset.minutes, 10);
+    startTimerByMinutes(mins);
+  });
+});
+
+// 自定义按钮点击
+customBtn.addEventListener('click', () => {
+  const mins = parseInt(customIn.value, 10);
+  if (!mins || mins <= 0) return alert('请输入有效分钟数');
+  startTimerByMinutes(mins);
+});

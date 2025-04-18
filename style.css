@@ -29,7 +29,16 @@ body {
   }
 
   .hidden { display: none; }
-body.wallpaper-bg1 { background: url('images/bg1.jpg') no-repeat center/cover; transition: background 0.5s ease; }
+
+  body.wallpaper-bg1 {
+    background: url('images/bg1.jpg') no-repeat center center;
+    background-size: contain;
+    transition: background 0.5s ease;
+  }
+  body.wallpaper-bg2 {
+    background: url('images/bg2.png') no-repeat center center;
+    background-size: contain;
+  }
 
 .container.skin-glass {
   background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,0.6);
@@ -46,4 +55,27 @@ body.wallpaper-bg1 { background: url('images/bg1.jpg') no-repeat center/cover; t
 }
 #settingsPanel button {
   display:block; width:100%; margin:6px 0; padding:6px; font-size:14px; cursor:pointer;
+}
+.presets {
+  margin-bottom: 10px;
+}
+.presets button {
+  margin: 0 5px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.custom {
+  margin-bottom: 15px;
+}
+.custom input {
+  width: 100px;
+  padding: 6px;
+  font-size: 14px;
+}
+.custom button {
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
 }
