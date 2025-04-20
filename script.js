@@ -1,4 +1,5 @@
 // script.js - 简化后的按钮版，修复默认背景与交互
+console.log('clickSound 元素是：', document.getElementById('clickSound'));
 
 document.addEventListener('DOMContentLoaded', () => {
   let timer=null, targetTime=null;
@@ -12,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const customModal   = document.getElementById('customModal');
   const confirmBtn    = document.getElementById('confirmCustom');
   const presetCustom  = document.getElementById('presetCustom');
+
+  console.log('clickSound 元素是：', document.getElementById('clickSound'));
 
   // 点击音效
   function playClick() { clickSound.currentTime=0; clickSound.play().catch(()=>{}); }
