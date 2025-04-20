@@ -1,34 +1,50 @@
 <!DOCTYPE html>
-<link rel="icon" href="data:;base64,=">
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>专注倒计时</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在线倒计时器</title>
+  <!-- 禁用默认 favicon 请求 -->
   <link rel="icon" href="data:;base64,=">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="wallpaper-bg2">
   <!-- 设置面板开关 -->
-  <button id="settingsToggle">⚙️</button>
+  <button id="settingsToggle" class="settings-toggle">⚙️</button>
   <!-- 设置面板 -->
   <div id="settingsPanel" class="hidden">
-    <h3>背景</h3>
-    <button data-wall="bg1">背景 1</button>
-    <button data-wall="bg2">背景 2</button>
-    <h3>皮肤</h3>
-    <button data-skin="glass">Glass</button>
-    <button data-skin="carbon">Carbon</button>
-    <button data-skin="llama">Llama</button>
-    <button data-skin="nano">Nano</button>
+    <button id="closeSettings" class="close-btn">×</button>
+    <h3>Wallpaper</h3>
+    <div class="wallpapers">
+      <!-- 请确保文件名大小写和路径一致 -->
+      <img class="wall-item" data-wall="bg1" src="images/bg1.jpg" alt="Wallpaper 1">
+      <img class="wall-item" data-wall="bg2" src="images/bg2.png" alt="Wallpaper 2">
+      <img class="wall-item" data-wall="bg3" src="images/bg3.png" alt="Wallpaper 3">
+      <img class="wall-item" src="images/bg4.png"  data-wall="bg4" alt="Wallpaper 4">
+      <img class="wall-item" src="images/bg5.png"  data-wall="bg5" alt="Wallpaper 5">
+      <img class="wall-item" src="images/bg6.png"  data-wall="bg6" alt="Wallpaper 6">
+      <img class="wall-item" src="images/bg7.png"  data-wall="bg7" alt="Wallpaper 7">
+      <img class="wall-item" src="images/bg8.png"  data-wall="bg8" alt="Wallpaper 8">
+      <img class="wall-item" src="images/bg9.png"  data-wall="bg9" alt="Wallpaper 9">
+      <img class="wall-item" src="images/bg10.png"  data-wall="bg10" alt="Wallpaper 10">
+      <img class="wall-item" src="images/bg11.png"  data-wall="bg11" alt="Wallpaper 11">
+      <img class="wall-item" src="images/bg12.png"  data-wall="bg12" alt="Wallpaper 12">
+      <img class="wall-item" data-wall="bg13" src="images/bg13.png" alt="Wallpaper 13">
+    </div>
+    <h3>Timer Skin</h3>
+    <div class="skins">
+      <button data-skin="glass">Glass</button>
+      <button data-skin="carbon">Carbon</button>
+      <button data-skin="llama">Llama</button>
+      <button data-skin="nano">Nano</button>
+      <button data-skin="transparent">Transparent</button>
+      <button data-skin="total-transparent">Total</button> 
+    </div>
   </div>
 
   <div class="container skin-glass">
     <h1>在线倒计时器</h1>
-
-    <!-- 8 格预设按钮 -->
     <div class="presets-grid">
       <button data-minutes="0.5">30s</button>
       <button data-minutes="1">1m</button>
@@ -39,24 +55,21 @@
       <button data-minutes="60">60m</button>
       <button data-minutes="custom" id="presetCustom">Custom</button>
     </div>
-
-    <!-- 倒计时显示 -->
     <div id="display">00:00</div>
-
-    <!-- ▶️/⏸️ 按钮 -->
     <button id="toggleBtn">▶️</button>
   </div>
 
-  <!-- Custom 输入分钟 模态框 -->
+  <!-- 自定义输入框 -->
   <div id="customModal" class="hidden">
     <div class="modal-content">
       <h3>请输入分钟数</h3>
-      <input type="number" id="customMinModal" placeholder="分钟" min="1" />
+      <input type="number" id="customMinModal" placeholder="分钟" min="1">
       <button id="confirmCustom">开始</button>
     </div>
   </div>
 
-  <audio id="alarm" src="audio/alarm1.mp3" preload="auto"></audio>
+  <audio id="alarm" src="audio/alarm2.mp3" preload="auto"></audio>
+  <audio id="clickSound" src="audio/Click1.mp3" preload="auto"></audio>
   <script src="script.js" defer></script>
 </body>
 </html>

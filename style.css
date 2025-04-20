@@ -1,87 +1,144 @@
-/* 全局 & 字体 */
-body, .container { font-family: 'Roboto Slab', serif; margin:0; padding:0; }
-body { height:100vh; display:flex; justify-content:center; align-items:center; }
+/* 基础 & 隐藏 */
+body, .container { font-family:'Roboto Slab', serif; margin:0; padding:0; }
+body { display:flex; justify-content:center; align-items:center; height:100vh; }
+.hidden { display:none !important; }
 
-/* 隐藏类 */
-.hidden { display: none; }
+/* 背景 */
+body[class^="wallpaper-bg"] { background-position:center; background-size:cover; transition:0.5s; }
+body.wallpaper-bg1 { background-image:url('images/bg1.jpg'); }
+body.wallpaper-bg2 { background-image:url('images/bg2.png'); }
+body.wallpaper-bg3 { background-image:url('images/bg3.png'); }
+body.wallpaper-bg4 { background-image:url('images/bg4.png'); }
+body.wallpaper-bg5 { background-image:url('images/bg5.png'); }
+body.wallpaper-bg6 { background-image:url('images/bg6.png'); }
+body.wallpaper-bg7 { background-image:url('images/bg7.png'); }
+body.wallpaper-bg8 { background-image:url('images/bg8.png'); }
+body.wallpaper-bg9 { background-image:url('images/bg9.png'); }
+body.wallpaper-bg10 { background-image:url('images/bg10.png'); }
+body.wallpaper-bg11 { background-image:url('images/bg11.png'); }
+body.wallpaper-bg12 { background-image:url('images/bg12.png'); }
+body.wallpaper-bg13 { background-image:url('images/bg13.png'); }
+/* ...bg3 至 bg13 同理 */
 
-/* 背景铺满 */
-body.wallpaper-bg1,
-body.wallpaper-bg2 {
-  background: no-repeat center center;
-  background-size: cover;
-  transition: background 0.5s ease;
-}
-body.wallpaper-bg1 { background-image: url('images/bg1.jpg'); }
-body.wallpaper-bg2 { background-image: url('images/bg2.png'); }
+/* 容器 */
+.container { background:rgba(255,255,255,0.3); backdrop-filter:blur(10px); padding:30px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2); text-align:center; }
 
-/* 容器 & 皮肤 */
-.container {
-  background:#fff; padding:30px; border-radius:8px;
-  text-align:center; box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  transition:background 0.5s, border 0.5s, color 0.5s;
-}
-.container.skin-glass { background:rgba(255,255,255,0.3); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.6); }
-.container.skin-carbon { background:#1e1e28; color:#fff; border:none; }
-.container.skin-llama { background:linear-gradient(135deg,#1f1f1f,#444); color:#b4ff9f; }
-.container.skin-nano { background:#f7f7f7; border:2px dashed #ccc; }
-h1 { margin-bottom:20px; }
+/* 预设按钮 */
+.presets-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
+.presets-grid button { padding:12px 0; font-size:14px; border:none; border-radius:8px; background:rgba(255,255,255,0.7); cursor:pointer; transition:0.3s; }
+.presets-grid button.selected { background:#ff6b6b; color:#fff; }
 
-/* 8 格预设网格 */
-.presets-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
-  margin-bottom:15px;
-}
-.presets-grid button {
-  padding:10px 0; font-size:14px; border:none; border-radius:6px;
-  background:rgba(255,255,255,0.6); cursor:pointer; transition:background 0.3s;
-}
-.presets-grid button.selected {
-  background:#ff6b6b; color:#fff;
-}
-
-/* 倒计时显示 */
+/* 倒计时数字 */
 #display { font-size:3rem; margin:20px 0; }
 
-/* ▶️/⏸️ 按钮 */
-#toggleBtn {
-  width:80px; height:80px; font-size:40px; border:none;
-  border-radius:50%; background:rgba(255,255,255,0.4);
-  cursor:pointer; transition:background 0.3s;
-}
-#toggleBtn:hover { background:rgba(255,255,255,0.6); }
+/* 播放/暂停按钮 */
+#toggleBtn { width:80px; height:80px; font-size:40px; border:none; border-radius:50%; background:rgba(0,182,255,0.8); color:#fff; line-height:80px; cursor:pointer; transition:0.3s; }
+#toggleBtn:hover { background:rgba(0,182,255,1); }
+@media(max-width:500px){ #toggleBtn{ width:60px; height:60px; font-size:32px; line-height:60px; } }
 
-/* 设置面板控制 */
-#settingsToggle {
-  position:fixed; top:20px; right:20px; font-size:24px;
-  background:none; border:none; cursor:pointer; z-index:1000;
-}
-#settingsPanel {
-  position:fixed; top:60px; right:20px;
-  background:rgba(255,255,255,0.8); padding:10px; border-radius:8px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:1000;
-}
-#settingsPanel button {
-  display:block; width:100%; margin:6px 0; padding:6px; cursor:pointer;
-}
+/* 设置面板 */
+.settings-toggle { position:fixed; top:20px; right:20px; font-size:24px; background:none; border:none; cursor:pointer; z-index:1000; }
+#settingsPanel { position:fixed; top:60px; right:20px; width:220px; max-height:70vh; overflow-y:auto; background:rgba(255,255,255,0.9); padding:10px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index:1000; }
+#settingsPanel h3 { margin:10px 0 5px; }
+.close-btn { position:absolute; top:6px; right:6px; background:none; border:none; font-size:20px; cursor:pointer; }
 
-/* Custom Modal */
-#customModal {
-  position:fixed; top:0; left:0; right:0; bottom:0;
-  background:rgba(0,0,0,0.5); display:flex;
-  justify-content:center; align-items:center; z-index:2000;
-}
-.modal-content {
-  background:#fff; padding:20px; border-radius:8px; text-align:center;
-}
-.modal-content input {
-  width:80px; padding:6px; font-size:16px; margin-right:10px;
-}
-.modal-content button {
-  padding:6px 20px; font-size:16px; cursor:pointer;
+/* Wallpaper 缩略 */
+.wall-item { width:100%; height:60px; object-fit:cover; border-radius:6px; margin-bottom:8px; cursor:pointer; opacity:0.7; transition:0.3s; }
+.wall-item:hover, .wall-item.selected { opacity:1; border:2px solid #ff6b6b; }
+
+/* Skin 按钮 */
+.skins button { display:block; width:100%; margin:6px 0; padding:8px; font-size:14px; border:none; border-radius:6px; background:rgba(255,255,255,0.7); cursor:pointer; transition:0.3s; }
+.skins button.selected, .skins button:hover { background:#ff6b6b; color:#fff; }
+
+/* Custom 弹框 */
+#customModal { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; z-index:2000; }
+.modal-content { background:#fff; padding:20px; border-radius:8px; text-align:center; }
+.modal-content input { width:80px; padding:6px; font-size:16px; margin-right:10px; }
+.modal-content button { padding:6px 20px; font-size:16px; cursor:pointer; }
+
+/* 皮肤样式 */
+.container.skin-glass {
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.6);
+  color: inherit;
 }
 
-/* 让 customModal 的 hidden 真正生效 */
-#customModal.hidden {
-  display: none;
+.container.skin-carbon {
+  background: #1e1e28;
+  color: #fff;
+  border: none;
+}
+
+.container.skin-llama {
+  background: linear-gradient(135deg, #1f1f1f, #444);
+  color: #b4ff9f;
+  border: none;
+}
+
+.container.skin-nano {
+  background: #f7f7f7;
+  color: #333;
+  border: 2px dashed #ccc;
+}
+/* 透明皮肤：板子全透明 */
+.container.skin-transparent {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* 按钮在透明皮肤下要“显现” */
+.container.skin-transparent .presets-grid button,
+.container.skin-transparent .skins button,
+.container.skin-transparent #toggleBtn {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.7);
+}
+
+/* 数字阴影，保证可读性 */
+.container.skin-transparent #display {
+  text-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+
+/* 悬停时再加深 */
+.container.skin-transparent .presets-grid button:hover,
+.container.skin-transparent .skins button:hover,
+.container.skin-transparent #toggleBtn:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+
+
+/* Total Transparent 皮肤：面板背景和模糊全去掉 */
+.container.skin-total-transparent {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+
+
+/* 按钮 & 数字专属于 total-transparent 时的样式 */
+.container.skin-total-transparent .presets-grid button,
+.container.skin-total-transparent .skins button,
+.container.skin-total-transparent #toggleBtn {
+  /* 白色半透明底色+边框确保可点击 */
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(0,0,0,0.2);
+  color: #000;
+  text-shadow: none;
+}
+
+/* 数字加阴影，突出显示 */
+.container.skin-total-transparent #display {
+  text-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+
+/* 悬停加深底色 */
+.container.skin-total-transparent .presets-grid button:hover,
+.container.skin-total-transparent .skins button:hover,
+.container.skin-total-transparent #toggleBtn:hover {
+  background: rgba(255,255,255,0.7);
 }
