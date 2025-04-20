@@ -1,5 +1,10 @@
 /* 基础 & 隐藏 */
-body, .container { font-family:'Roboto Slab', serif; margin:0; padding:0; }
+/* 全局 & 字体 */
+body, .container {
+  font-family: 'Noto Sans SC', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 body { display:flex; justify-content:center; align-items:center; height:100vh; }
 .hidden { display:none !important; }
 
@@ -32,26 +37,29 @@ body.wallpaper-bg13 { background-image:url('images/bg13.png'); }
 #display { font-size:3rem; margin:20px 0; }
 
 /* 播放/暂停按钮 */
+/* ▶️/⏸️ 按钮：绝对居中，兼容所有设备 */
 #toggleBtn {
-  width:80px;
-  height:80px;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size:40px;
+  font-size: 40px;
   border: none;
   border-radius: 50%;
-  background: rgba(0,182,255,0.8);
+  background: rgba(0, 182, 255, 0.8);
   color: #fff;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background 0.3s;
 }
-
-@media(max-width:500px){
+#toggleBtn:hover {
+  background: rgba(0, 182, 255, 1);
+}
+@media (max-width: 500px) {
   #toggleBtn {
-    width:60px;
-    height:60px;
-    font-size:32px;
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
   }
 }
 
@@ -160,4 +168,16 @@ body.wallpaper-bg13 { background-image:url('images/bg13.png'); }
 .container.skin-total-transparent .skins button:hover,
 .container.skin-total-transparent #toggleBtn:hover {
   background: rgba(255,255,255,0.7);
+}
+
+/* 让整个计时面板垂直排列且水平居中 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 给 #toggleBtn 一些上边距，保证它在数字下方居中 */
+#toggleBtn {
+  margin-top: 20px; /* 你可以根据需要调整 */
 }
