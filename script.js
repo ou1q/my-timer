@@ -1,4 +1,13 @@
 // script.js - 简化后的按钮版，修复默认背景与交互
+
+// 页面首个交互解锁 clickSound
+function unlockClickSound() {
+  clickSound.play().then(() => clickSound.pause()).catch(() => {});
+  // 解绑自己，后续不必再解锁
+  window.removeEventListener('pointerdown', unlockClickSound);
+}
+window.addEventListener('pointerdown', unlockClickSound);
+
 console.log('clickSound 元素是：', document.getElementById('clickSound'));
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -61,23 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // 皮肤切换：点击就生效并收起面板
-document.querySelectorAll('.skins button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const skin = btn.dataset.skin;                   // 拿到 glass/carbon/…
-    console.log('切换皮肤到', skin);                 // 在控制台确认点击被捕获
-    // 修改 container 的类名
-    const container = document.querySelector('.container');
-    container.className = 'container skin-' + skin;
-    // 高亮当前按钮
-    document.querySelectorAll('.skins button')
-      .forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    // 隐藏设置面板
-    document.getElementById('settingsPanel')
-      .classList.add('hidden');
+  document.querySelectorAll('.skins button').forEach(btn => {
+    btn.addEventListener('pointerdown', () => {
+      // 先播放点击音
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+  
+      // 然后再切换皮肤逻辑
+      const skin = btn.dataset.skin;
+      const container = document.querySelector('.container');
+      container.className = 'container skin-' + skin;
+  
+      document.querySelectorAll('.skins button')
+        .forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      document.getElementById('settingsPanel')
+        .classList.add('hidden');
+    });
   });
-});
-
 
   // 预设按钮
   document.querySelectorAll('.presets-grid button').forEach(btn=>btn.addEventListener('click',()=>{
