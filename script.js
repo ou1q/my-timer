@@ -1,26 +1,30 @@
-// —— 一次性解锁 clickSound，让后续 pointerdown 立刻有声 —— 
-const clickSound = document.getElementById('clickSound');
-function unlockClick() {
-  clickSound.play().then(()=>clickSound.pause()).catch(()=>{});
-  window.removeEventListener('pointerdown', unlockClick);
-}
-window.addEventListener('pointerdown', unlockClick);
+// script.js - 优化“按下触发音效，点击触发逻辑”，滑动不误触
 
-// 每个按钮“按下”就播放点击音
+// —— 一次性解锁 clickSound 和 alarm，让后续 pointerdown 立即有声 ——
+const clickSound = document.getElementById('clickSound');
+const alarm      = document.getElementById('alarm');
+function unlockAll() {
+  clickSound.play().then(() => clickSound.pause()).catch(() => {});
+  alarm.play().then(() => alarm.pause()).catch(() => {});
+  window.removeEventListener('pointerdown', unlockAll);
+}
+window.addEventListener('pointerdown', unlockAll);
+
+// 每个按钮“按下”就播放点击音效
 document.querySelectorAll('button').forEach(btn =>
   btn.addEventListener('pointerdown', () => {
     clickSound.currentTime = 0;
-    clickSound.play().catch(()=>{});
+    clickSound.play().catch(() => {});
   })
 );
 
-// script.js - 简化后的按钮版，修复默认背景与交互
+// 主逻辑：DOM 加载完成后再绑定 click 事件触发真正操作
 
 document.addEventListener('DOMContentLoaded', () => {
-  let timer = null, targetTime = null;
+  let timer = null;
+  let targetTime = null;
 
   const display       = document.getElementById('display');
-  const alarm         = document.getElementById('alarm');
   const toggleBtn     = document.getElementById('toggleBtn');
   const settingsBtn   = document.getElementById('settingsToggle');
   const settingsPanel = document.getElementById('settingsPanel');
@@ -29,18 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmBtn    = document.getElementById('confirmCustom');
   const presetCustom  = document.getElementById('presetCustom');
 
-  // 解锁铃声（pointerdown 解锁后再点击任何预设也能立刻响）
-  function unlockAlarm() {
-    alarm.play().then(()=>alarm.pause()).catch(()=>{});
-  }
-  toggleBtn.addEventListener('pointerdown', unlockAlarm);
-  document.querySelectorAll('.presets-grid button')
-          .forEach(b => b.addEventListener('pointerdown', unlockAlarm));
-
   // 更新显示
   function updateDisplay(sec) {
-    const m = String(Math.floor(sec/60)).padStart(2,'0');
-    const s = String(sec%60).padStart(2,'0');
+    const m = String(Math.floor(sec / 60)).padStart(2, '0');
+    const s = String(sec % 60).padStart(2, '0');
     display.textContent = `${m}:${s}`;
   }
 
@@ -51,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer);
       localStorage.removeItem('timerTarget');
       updateDisplay(0);
-      alarm.play().catch(()=>{});
+      alarm.play().catch(() => {});
       toggleBtn.textContent = '▶️';
     } else {
       updateDisplay(diff);
@@ -69,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ▶️/⏸️ 切换
-  toggleBtn.addEventListener('pointerdown', () => {
+  toggleBtn.addEventListener('click', () => {
     if (timer) {
       clearInterval(timer);
       timer = null;
@@ -81,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 恢复刷新后倒计时
+  // 页面加载时恢复倒计时
   const saved = localStorage.getItem('timerTarget');
   if (saved) {
     targetTime = parseInt(saved, 10);
@@ -95,16 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 设置面板开关
-  settingsBtn.addEventListener('pointerdown', () =>
+  settingsBtn.addEventListener('click', () =>
     settingsPanel.classList.toggle('hidden')
   );
-  closeSettings.addEventListener('pointerdown', () =>
+  closeSettings.addEventListener('click', () =>
     settingsPanel.classList.add('hidden')
   );
 
-  // 背景切换
+  // 背景切换（click 触发）
   document.querySelectorAll('.wall-item').forEach(el =>
-    el.addEventListener('pointerdown', () => {
+    el.addEventListener('click', () => {
       document.querySelectorAll('.wall-item').forEach(i => i.classList.remove('selected'));
       el.classList.add('selected');
       document.body.className = 'wallpaper-' + el.dataset.wall;
@@ -117,13 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     def.classList.add('selected');
     document.body.className = 'wallpaper-bg2';
   }
+
   // 默认 Total Transparent 皮肤高亮
   const defSkin = document.querySelector('.skins button[data-skin="total-transparent"]');
   if (defSkin) defSkin.classList.add('selected');
 
-  // 皮肤切换：pointerdown 立刻切换并收起面板
+  // 皮肤切换（click 触发）
   document.querySelectorAll('.skins button').forEach(btn => {
-    btn.addEventListener('pointerdown', () => {
+    btn.addEventListener('click', () => {
       const skin = btn.dataset.skin;
       const container = document.querySelector('.container');
       container.className = 'container skin-' + skin;
@@ -134,9 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 预设按钮：pointerdown 启动计时或弹框
+  // 预设按钮（click 触发）
   document.querySelectorAll('.presets-grid button').forEach(btn =>
-    btn.addEventListener('pointerdown', () => {
+    btn.addEventListener('click', () => {
       document.querySelectorAll('.presets-grid button').forEach(b => b.classList.remove('selected'));
       if (btn === presetCustom) {
         customModal.classList.remove('hidden');
@@ -147,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   );
 
-  // Custom 模态框
-  confirmBtn.addEventListener('pointerdown', () => {
+  // Custom 输入确认（click 触发）
+  confirmBtn.addEventListener('click', () => {
     const m = parseInt(document.getElementById('customMinModal').value, 10);
     if (!m || m <= 0) return;
     customModal.classList.add('hidden');
@@ -158,5 +155,5 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer(m);
   });
 
-  console.log('✅ 修订版加载完成，所有 click → pointerdown');
+  console.log('✅ 更新完成：pointerdown 播音效，click 触发逻辑');
 });
