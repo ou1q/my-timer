@@ -30,7 +30,7 @@ body.wallpaper-bg13 { background-image:url('images/bg13.png'); }
 
 /* 预设按钮 */
 .presets-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
-.presets-grid button { padding:12px 0; font-size:14px; border:none; border-radius:8px; background:rgba(255,255,255,0.7); cursor:pointer; transition:0.3s; }
+.presets-grid button { padding:12px 0; min-width: 60px; font-size:14px; border:none; border-radius:8px; background:rgba(255,255,255,0.7); cursor:pointer; transition:0.3s; }
 .presets-grid button.selected { background:#ff6b6b; color:#fff; }
 
 /* 倒计时数字 */

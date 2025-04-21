@@ -1,21 +1,28 @@
 // script.js - 优化“按下触发音效，点击触发逻辑”，滑动不误触
 
-// —— 一次性解锁 clickSound 和 alarm，让后续 pointerdown 立即有声 ——
+
+
+// —— 一次性解锁 clickSound —— 保持不变
 const clickSound = document.getElementById('clickSound');
-const alarm      = document.getElementById('alarm');
 function unlockAll() {
-  clickSound.play().then(() => clickSound.pause()).catch(() => {});
-  alarm.play().then(() => alarm.pause()).catch(() => {});
+  clickSound.play().then(()=>clickSound.pause()).catch(()=>{});
   window.removeEventListener('pointerdown', unlockAll);
 }
 window.addEventListener('pointerdown', unlockAll);
 
-// 每个按钮“按下”就播放点击音效
-document.querySelectorAll('button').forEach(btn =>
-  btn.addEventListener('pointerdown', () => {
-    clickSound.currentTime = 0;
-    clickSound.play().catch(() => {});
-  })
+// —— 只给倒计时相关按钮绑定“按下”音效 —— 
+const timerButtons = [
+  '#toggleBtn',               // 播放/暂停
+  '.presets-grid button',     // 30s/1m/…/Custom
+  '#confirmCustom'            // Custom 弹框里的“开始”
+];
+timerButtons.forEach(sel =>
+  document.querySelectorAll(sel).forEach(btn =>
+    btn.addEventListener('pointerdown', () => {
+      clickSound.currentTime = 0;
+      clickSound.play().catch(()=>{});
+    })
+  )
 );
 
 // 主逻辑：DOM 加载完成后再绑定 click 事件触发真正操作
