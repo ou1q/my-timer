@@ -110,6 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
   closeSettings.addEventListener('click', () =>
     settingsPanel.classList.add('hidden')
   );
+  
+  // —— 点击面板外部就自动收起 —— 
+document.addEventListener('click', e => {
+  // 如果面板是打开状态，并且点的不是面板内部，也不是设置按钮，就收起
+  if (
+    !settingsPanel.classList.contains('hidden') &&
+    !settingsPanel.contains(e.target) &&
+    e.target !== settingsBtn
+  ) {
+    settingsPanel.classList.add('hidden');
+  }
+});
 
   // 背景切换（click 触发）
   document.querySelectorAll('.wall-item').forEach(el =>
