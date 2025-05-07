@@ -1,14 +1,20 @@
 // script.js - 优化“按下触发音效，点击触发逻辑”，滑动不误触
 
-
-
-// —— 一次性解锁 clickSound —— 保持不变
+// —— 一次性解锁 clickSound + alarmSound —— 
 const clickSound = document.getElementById('clickSound');
-function unlockAll() {
+const alarm      = document.getElementById('alarm');
+
+function unlockMedia() {
+  // 解锁点击音
   clickSound.play().then(()=>clickSound.pause()).catch(()=>{});
-  window.removeEventListener('pointerdown', unlockAll);
+  // 解锁闹钟音
+  alarm.play().then(()=>alarm.pause()).catch(()=>{});
+  // 解绑自己
+  window.removeEventListener('pointerdown', unlockMedia);
 }
-window.addEventListener('pointerdown', unlockAll);
+
+// 在用户第一次触摸时执行解锁
+window.addEventListener('pointerdown', unlockMedia);
 
 // —— 只给倒计时相关按钮绑定“按下”音效 —— 
 const timerButtons = [
